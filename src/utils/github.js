@@ -104,29 +104,29 @@ export async function getGitHubRepos() {
 
 export async function getGitHubLangBreakdown() {
   const repos = await getGitHubRepos();
-  const repoLangs = [];
+  const langBytes = {};
 
-  const fetches = repos.slice(0, 15).map(async (repo) => {
+  const fetches = repos.slice(0, 20).map(async (repo) => {
     try {
       const res = await fetch(repo.languages_url, { headers });
       const langs = await res.json();
-      const total = Object.values(langs).reduce((s, b) => s + b, 0);
-      if (total > 0) {
-        const normalized = {};
-        Object.entries(langs).forEach(([n, b]) => normalized[n] = b / total);
-        repoLangs.push(normalized);
-      }
+
+      Object.entries(langs).forEach(([lang, bytes]) => {
+        langBytes[lang] = (langBytes[lang] || 0) + bytes;
+      });
     } catch (e) { }
   });
 
   await Promise.all(fetches);
 
+  const totalBytes = Object.values(langBytes).reduce((s, b) => s + b, 0);
   const totals = {};
-  repoLangs.forEach(rl => {
-    Object.entries(rl).forEach(([n, p]) => {
-      totals[n] = (totals[n] || 0) + (p / repoLangs.length);
+
+  if (totalBytes > 0) {
+    Object.entries(langBytes).forEach(([lang, bytes]) => {
+      totals[lang] = bytes / totalBytes;
     });
-  });
+  }
 
   return totals;
 }
