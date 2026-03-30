@@ -77,8 +77,26 @@ export async function getGitHubRepos() {
   if (cachedRepos) return cachedRepos;
   try {
     const res = await fetch(`https://api.github.com/users/${USER}/repos?type=public&sort=updated&per_page=100`, { headers });
-    cachedRepos = await res.json();
-    return Array.isArray(cachedRepos) ? cachedRepos : [];
+    const data = await res.json();
+    const repos = Array.isArray(data) ? data : [];
+
+    const topRepos = repos
+      .sort((a, b) => b.stargazers_count - a.stargazers_count)
+      .slice(0, 15);
+
+    const detailedRepos = await Promise.all(
+      topRepos.map(async (repo) => {
+        try {
+          const detailRes = await fetch(repo.url, { headers });
+          return await detailRes.json();
+        } catch (e) { return repo; }
+      })
+    );
+
+    const detailedIds = new Set(detailedRepos.map(r => r.id));
+    cachedRepos = [...detailedRepos, ...repos.filter(r => !detailedIds.has(r.id))];
+
+    return cachedRepos;
   } catch (err) {
     return [];
   }

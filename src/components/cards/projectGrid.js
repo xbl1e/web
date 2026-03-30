@@ -39,7 +39,7 @@ export async function initProjectGrid() {
             </div>
             <div class="gh-repo-meta-full">
               <div class="gh-repo-title-row">
-                <span class="gh-repo-title scramble-text">${repo.full_name}</span>
+                <span class="gh-repo-title scramble-text">${repo.name}</span>
                 <span class="${badgeClass}">${repo.archived ? 'Public archive' : 'Public'}</span>
               </div>
             </div>
@@ -51,27 +51,29 @@ export async function initProjectGrid() {
           ` : ''}
           <p class="gh-repo-desc">${repo.description || 'No description provided.'}</p>
           <div class="gh-repo-footer">
-            <div class="gh-repo-stats">
-              <span class="gh-stat-item">
-                <i class="ph ph-star"></i> ${repo.stargazers_count}
-              </span>
-              ${repo.license ? `
-                <span class="gh-stat-item">
-                  <i class="ph ph-scales"></i> ${repo.license.spdx_id || repo.license.name}
-                </span>
+            <div class="flex-row gap-1 align-center">
+              ${(repo.language || (repo.parent && repo.parent.language)) ? `
+                <div class="gh-repo-lang">
+                  <span class="gh-lang-color" style="background-color: ${colorMap[repo.language || repo.parent.language] || '#888890'};"></span>
+                  <span class="gh-lang-name">${repo.language || repo.parent.language}</span>
+                </div>
               ` : ''}
-              <span class="gh-stat-item">
-                <i class="ph ph-git-fork"></i> ${repo.forks_count}
-              </span>
-            </div>
-            ${repo.language ? `
-              <div class="gh-repo-lang">
-                <span class="gh-lang-color" style="background-color: ${langColor};"></span>
-                <span class="gh-lang-name">${repo.language}</span>
+              <div class="gh-repo-stats">
+                <span class="gh-stat-item">
+                  <i class="ph ph-star"></i> ${repo.stargazers_count}
+                </span>
+                ${repo.license ? `
+                  <span class="gh-stat-item">
+                    <i class="ph ph-scales"></i> ${repo.license.spdx_id || repo.license.name}
+                  </span>
+                ` : ''}
+                <span class="gh-stat-item">
+                  <i class="ph ph-git-fork"></i> ${repo.forks_count}
+                </span>
               </div>
-            ` : ''}
+            </div>
+            <div class="gh-repo-updated">updated ${timeAgo}</div>
           </div>
-          <div class="gh-repo-updated">updated ${timeAgo}</div>
         </div>
       </a>
     `;

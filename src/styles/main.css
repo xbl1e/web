@@ -431,6 +431,23 @@ body {
   margin-bottom: 2rem;
 }
 
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.gap-1 {
+  gap: 1rem;
+}
+
+.align-center {
+  align-items: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
 .border-bottom {
   border-bottom: 1px solid var(--border-dim);
   padding-bottom: 1rem;
@@ -694,7 +711,13 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 0.5rem;
+  gap: 1rem;
+  width: 100%;
+}
+
+.gh-repo-meta-full {
+  flex: 1;
+  min-width: 0;
 }
 
 .gh-repo-header {
@@ -702,6 +725,14 @@ body {
   align-items: flex-start;
   gap: 0.75rem;
   margin-bottom: 1rem;
+  width: 100%;
+}
+
+.gh-repo-lang {
+  display: flex;
+  align-items: center;
+  font-size: 0.75rem;
+  color: #8b949e;
 }
 
 .gh-lang-color {
@@ -709,7 +740,11 @@ body {
   height: 12px;
   border-radius: 50%;
   display: inline-block;
-  margin-right: 0.4rem;
+  margin-right: 0.5rem;
+}
+
+.gh-lang-name {
+  color: #8b949e;
 }
 
 .discord-activity {
