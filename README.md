@@ -1,4 +1,7 @@
 ## <img src="./src/assets/page/xbl1e.png" width="28" style="vertical-align: middle; border-radius: 6px;"> xbl1e
+
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/752bfe6f306e444ab267364df585c262)](https://app.codacy.com/gh/xbl1e/web?utm_source=github.com&utm_medium=referral&utm_content=xbl1e/web&utm_campaign=Badge_Grade)
+
 My website — Vite + GSAP + Lenis + Three.js.
 
 ### <img height="18" src="./src/assets/readme/features.svg" style="vertical-align: middle;">&nbsp;&nbsp;Structure
