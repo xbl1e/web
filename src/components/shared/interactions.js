@@ -3,6 +3,9 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
+/* ─────────────────────────────────────────────────────────
+   SCRAMBLE TEXT — hover letter scramble on tagged elements
+   ───────────────────────────────────────────────────────── */
 export function initScrambleText() {
   const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+';
   const scramblers = document.querySelectorAll('.scramble-text');
@@ -42,64 +45,134 @@ export function initScrambleText() {
   });
 }
 
+/* ─────────────────────────────────────────────────────────
+   TYPOGRAPHY REVEAL — staggered clip-path wipe on load
+   ───────────────────────────────────────────────────────── */
 export function initTypographyReveal() {
-  const tl = gsap.timeline({ defaults: { ease: "power4.out" } });
+  const tl = gsap.timeline({ defaults: { ease: 'power4.out' } });
 
   tl.fromTo('.reveal-text',
-    { y: 30, opacity: 0, clipPath: "polygon(0 0, 100% 0, 100% 0, 0 0)" },
-    { y: 0, opacity: 1, clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)", duration: 0.8, stagger: 0.05, delay: 0 }
+    { y: 40, opacity: 0, clipPath: 'polygon(0 0, 100% 0, 100% 0, 0 0)' },
+    { y: 0,  opacity: 1, clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
+      duration: 0.9, stagger: 0.07, delay: 0.1 }
   );
 
   tl.fromTo('.reveal-desc',
-    { opacity: 0, y: 15 },
-    { opacity: 1, y: 0, duration: 0.6, stagger: 0.05 },
-    "-=0.4"
+    { opacity: 0, y: 18 },
+    { opacity: 1, y: 0, duration: 0.7, stagger: 0.06 },
+    '-=0.5'
   );
 
   tl.fromTo('.reveal-visual',
-    { opacity: 0, scale: 0.99 },
-    { opacity: 1, scale: 1, duration: 1, ease: "power2.out" },
-    "-=0.5"
+    { opacity: 0, scale: 0.985 },
+    { opacity: 1, scale: 1, duration: 1.1, ease: 'power2.out' },
+    '-=0.7'
   );
 }
 
+/* ─────────────────────────────────────────────────────────
+   CARD CLIP REVEAL — scroll-triggered wipe per card
+   ───────────────────────────────────────────────────────── */
 export function initCardClipReveal() {
-  const cards = document.querySelectorAll('.reveal-card, .reveal-visual');
-  cards.forEach(card => {
+  const cards = document.querySelectorAll('.reveal-card');
+
+  cards.forEach((card, i) => {
     gsap.fromTo(card,
-      { clipPath: "inset(0% 100% 0% 0%)", opacity: 0 },
+      { opacity: 0, y: 30 },
       {
-        clipPath: "inset(0% 0% 0% 0%)",
         opacity: 1,
-        duration: 0.8,
-        ease: "power3.inOut",
+        y: 0,
+        duration: 0.7,
+        ease: 'power3.out',
+        delay: (i % 3) * 0.07,
         scrollTrigger: {
           trigger: card,
-          start: "top 90%"
+          start: 'top 92%',
         }
       }
     );
   });
+
+  // Section headers
+  gsap.utils.toArray('.reveal-desc').forEach(el => {
+    if (el.closest('.hero-split')) return; // handled by typography reveal
+    ScrollTrigger.create({
+      trigger: el,
+      start: 'top 94%',
+      onEnter: () => gsap.to(el, { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' }),
+    });
+  });
 }
 
+/* ─────────────────────────────────────────────────────────
+   TILT EFFECT — subtle 3-D rotate on card hover
+   ───────────────────────────────────────────────────────── */
+export function initTiltEffect() {
+  const cards = document.querySelectorAll('.card-inner');
+
+  cards.forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const cx = rect.width  / 2;
+      const cy = rect.height / 2;
+
+      gsap.to(card, {
+        rotateX: ((y - cy) / cy) * -6,
+        rotateY: ((x - cx) / cx) * 6,
+        transformPerspective: 1200,
+        ease: 'power2.out',
+        duration: 0.5
+      });
+    });
+
+    card.addEventListener('mouseleave', () => {
+      gsap.to(card, { rotateX: 0, rotateY: 0, ease: 'power3.out', duration: 1 });
+    });
+  });
+}
+
+/* ─────────────────────────────────────────────────────────
+   PARALLAX — mild vertical drift on cards while scrolling
+   ───────────────────────────────────────────────────────── */
+export function initParallax() {
+  gsap.utils.toArray('.hero-visual').forEach(el => {
+    gsap.to(el, {
+      yPercent: -12,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: el,
+        start: 'top bottom',
+        end: 'bottom top',
+        scrub: true
+      }
+    });
+  });
+}
+
+/* ─────────────────────────────────────────────────────────
+   MAGNETIC FRICTION — elastic pull on buttons
+   ───────────────────────────────────────────────────────── */
 export function initMagneticFriction() {
   const magnetics = document.querySelectorAll('.magnetic');
+
   magnetics.forEach(btn => {
     btn.addEventListener('mousemove', (e) => {
       const rect = btn.getBoundingClientRect();
-      const x = (e.clientX - rect.left - rect.width / 2) * 0.4;
-      const y = (e.clientY - rect.top - rect.height / 2) * 0.4;
+      const x = (e.clientX - rect.left - rect.width  / 2) * 0.35;
+      const y = (e.clientY - rect.top  - rect.height / 2) * 0.35;
 
-      gsap.to(btn, { x: x, y: y, duration: 0.4, ease: "power2.out" });
+      gsap.to(btn, { x, y, duration: 0.4, ease: 'power2.out' });
 
       const text = btn.querySelector('.btn-text');
-      if (text) gsap.to(text, { x: x * 0.5, y: y * 0.5, duration: 0.4, ease: "power2.out" });
+      if (text) gsap.to(text, { x: x * 0.4, y: y * 0.4, duration: 0.4, ease: 'power2.out' });
     });
 
     btn.addEventListener('mouseleave', () => {
-      gsap.to(btn, { x: 0, y: 0, duration: 0.7, ease: "elastic.out(1, 0.3)" });
+      gsap.to(btn, { x: 0, y: 0, duration: 0.8, ease: 'elastic.out(1, 0.3)' });
       const text = btn.querySelector('.btn-text');
-      if (text) gsap.to(text, { x: 0, y: 0, duration: 0.7, ease: "elastic.out(1, 0.3)" });
+      if (text) gsap.to(text, { x: 0, y: 0, duration: 0.8, ease: 'elastic.out(1, 0.3)' });
     });
   });
 }

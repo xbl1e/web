@@ -4,70 +4,144 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>xbl1e</title>
+  <title>xbl1e — software developer</title>
+  <meta name="description" content="Software developer. Writing code that feels right. Mostly backend systems, but I care a lot about how the interface feels." />
   <link rel="icon" type="image/png" href="./src/assets/page/xbl1e.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300;1,6..72,400&display=swap"
     rel="stylesheet">
   <script src="https://unpkg.com/@phosphor-icons/web"></script>
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
 </head>
 
 <body>
+  <!-- Preloader -->
+  <div id="preloader" class="preloader">
+    <div class="preloader-content">
+      <div class="preloader-text">Loading Experience...</div>
+      <div class="preloader-bar"><div class="preloader-progress"></div></div>
+    </div>
+  </div>
+
+  <!-- Effects -->
+  <div class="custom-cursor"></div>
+  <div class="film-grain"></div>
+
+  <!-- Navigation -->
   <nav class="floating-nav">
     <div class="nav-pill">
       <a href="#" class="nav-brand">
         <img src="./src/assets/page/xbl1e.png" alt="xbl1e logo" class="nav-logo">
-        <span class="brand-name">xbl1e</span>
+        <span>xbl1e</span>
       </a>
       <span class="nav-divider"></span>
       <div class="nav-links">
         <a href="#work">Work</a>
         <a href="#about">About</a>
         <a href="#tos">ToS</a>
-        <a href="#privacy">Privacy Policy</a>
+        <a href="#privacy">Privacy</a>
       </div>
     </div>
   </nav>
 
   <main id="smooth-wrapper">
     <div id="smooth-content">
+
+      <!-- ══ HERO ════════════════════════════════════════════════════ -->
       <section class="hero-split">
+        <!-- Aurora canvas background -->
+        <canvas id="aurora-canvas"></canvas>
+
+        <!-- Left: Typography -->
         <div class="hero-typography reveal-visual">
-          <div class="kicker reveal-text">// software developer</div>
+          <div class="kicker reveal-text">software developer</div>
+
           <h1 class="hero-title">
-            <div class="reveal-text">writing code</div>
-            <div class="reveal-text">that <em class="serif-italic">feels right.</em></div>
+            <span class="line-wrap">
+              <span class="reveal-text">writing code</span>
+            </span>
+            <span class="line-wrap">
+              <span class="reveal-text">that <em class="serif-italic">feels right.</em></span>
+            </span>
           </h1>
-          <p class="hero-description reveal-desc">i like building things that are quiet, fast, and do exactly what they
-            need to. mostly backend systems, but i care a lot about how the interface feels.</p>
+
+          <p class="hero-description reveal-desc">
+            i like building things that are quiet, fast, and do exactly what
+            they need to. mostly backend systems, but i care a lot about how
+            the interface feels.
+          </p>
+
           <div class="hero-cta reveal-desc">
             <a href="https://github.com/xbl1e" target="_blank" class="btn-physical magnetic">
-              <span class="btn-text">see what i'm making</span>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="square" />
+              <span class="btn-text">see what i&apos;m making</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="square"/>
               </svg>
+            </a>
+            <a href="#work" class="btn-ghost magnetic">
+              <span class="btn-text">view work</span>
             </a>
           </div>
         </div>
+
+        <!-- Right: GIF Visual -->
         <div class="hero-visual reveal-visual">
           <img src="./src/assets/page/hero.gif" alt="Hero Visual" class="hero-gif">
         </div>
+
+        <!-- Scroll hint -->
+        <div class="hero-scroll-hint reveal-desc">
+          <span class="hero-scroll-line"></span>
+          <span class="hero-scroll-label">scroll</span>
+        </div>
       </section>
 
-      <section class="blueprint-section" id="work">
-        <div class="section-header reveal-desc">
-          <span class="mono-tag copper-text">[ 01. ME ]</span>
+      <!-- ══ MARQUEE STRIP ═══════════════════════════════════════════ -->
+      <div class="marquee-strip" aria-hidden="true">
+        <div class="marquee-track">
+          <!-- first set -->
+          <span class="marquee-item"><span class="marquee-dot"></span>Rust</span>
+          <span class="marquee-item"><span class="marquee-dot"></span>Next.js</span>
+          <span class="marquee-item"><span class="marquee-dot"></span>React</span>
+          <span class="marquee-item"><span class="marquee-dot"></span>TypeScript</span>
+          <span class="marquee-item"><span class="marquee-dot"></span>SurrealDB</span>
+          <span class="marquee-item"><span class="marquee-dot"></span>Performance</span>
+          <span class="marquee-item"><span class="marquee-dot"></span>Open Source</span>
+          <span class="marquee-item"><span class="marquee-dot"></span>Backend Systems</span>
+          <span class="marquee-item"><span class="marquee-dot"></span>API Design</span>
+          <span class="marquee-item"><span class="marquee-dot"></span>UI Details</span>
+          <!-- duplicate for seamless loop -->
+          <span class="marquee-item"><span class="marquee-dot"></span>Rust</span>
+          <span class="marquee-item"><span class="marquee-dot"></span>Next.js</span>
+          <span class="marquee-item"><span class="marquee-dot"></span>React</span>
+          <span class="marquee-item"><span class="marquee-dot"></span>TypeScript</span>
+          <span class="marquee-item"><span class="marquee-dot"></span>SurrealDB</span>
+          <span class="marquee-item"><span class="marquee-dot"></span>Performance</span>
+          <span class="marquee-item"><span class="marquee-dot"></span>Open Source</span>
+          <span class="marquee-item"><span class="marquee-dot"></span>Backend Systems</span>
+          <span class="marquee-item"><span class="marquee-dot"></span>API Design</span>
+          <span class="marquee-item"><span class="marquee-dot"></span>UI Details</span>
         </div>
+      </div>
+
+      <!-- ══ WORK / ABOUT SECTION ════════════════════════════════════ -->
+      <section class="blueprint-section" id="work">
+
+        <!-- 01. ME -->
+        <div class="section-header reveal-desc">
+          <span class="section-num">01</span>
+          <span class="section-title">Me</span>
+        </div>
+
         <div class="blueprint-grid">
+          <!-- Network canvas card -->
           <div class="card span-8 reveal-card">
-            <div class="card-sheen"></div>
             <div class="card-inner">
               <div class="blueprint-visual relative">
                 <canvas id="network-canvas"
-                  style="position: absolute; top:0; left:0; width:100%; height:100%;"></canvas>
+                  style="position:absolute;top:0;left:0;width:100%;height:100%;"></canvas>
               </div>
               <div class="card-content mt-auto pt-2">
                 <p class="card-desc">i spent a few months rewriting a sync engine. it was mostly about finding
@@ -76,96 +150,109 @@
             </div>
           </div>
 
+          <!-- What matters -->
           <div class="card span-4 card-elevated reveal-card">
-            <div class="card-sheen"></div>
-            <div class="card-inner flex-col" style="position: relative;">
+            <div class="card-inner flex-col" style="position:relative;">
               <canvas id="sparkline-canvas"
-                style="position: absolute; bottom:0; left:0; width:100%; height: 60%; opacity: 0.3; pointer-events: none;"></canvas>
-              <div class="card-top-bar" style="position: relative; z-index: 2;">
-                <span class="top-tag copper-text">WHAT MATTERS</span>
+                style="position:absolute;bottom:0;left:0;width:100%;height:60%;opacity:0.2;pointer-events:none;"></canvas>
+              <div class="card-top-bar" style="position:relative;z-index:2;">
+                <span class="top-tag copper-text">What Matters</span>
               </div>
               <div class="metrics-content">
                 <div class="metric-block">
-                  <div class="metric-value">speed<span class="metric-unit">.</span></div>
-                  <div class="metric-label">IN RESPONSIVENESS</div>
+                  <div class="metric-value glitch" data-text="speed">speed<span class="metric-unit">.</span></div>
+                  <div class="metric-label">in responsiveness</div>
                 </div>
                 <div class="metric-block mt-auto">
-                  <div class="metric-value">detail<span class="metric-unit">.</span></div>
-                  <div class="metric-label">IN THE SMALL THINGS</div>
+                  <div class="metric-value glitch" data-text="detail">detail<span class="metric-unit">.</span></div>
+                  <div class="metric-label">in the small things</div>
                 </div>
               </div>
             </div>
           </div>
 
+          <!-- How I work -->
           <div class="card span-4 reveal-card">
-            <div class="card-sheen"></div>
             <div class="card-inner">
               <div class="card-top-bar border-bottom">
-                <span class="top-tag">HOW I WORK</span>
+                <span class="top-tag">How I Work</span>
               </div>
               <div class="card-content editorial">
-                <h3 class="serif-italic large-quote">"good software shouldn't draw attention to itself."</h3>
+                <h3 class="serif-italic large-quote">&ldquo;good software shouldn&apos;t draw attention to itself.&rdquo;</h3>
               </div>
             </div>
           </div>
 
+          <!-- Tools -->
           <div class="card span-8 reveal-card">
-            <div class="card-sheen"></div>
             <div class="card-inner">
               <div class="card-top-bar border-bottom">
-                <span class="top-tag">TOOLS I REACH FOR</span>
+                <span class="top-tag">Tools I reach for</span>
               </div>
               <div class="card-content">
                 <div class="stack-list">
-                  <div class="stack-item"><i class="devicon-rust-plain text-xl" style="color: #dea584;"></i> rust</div>
-                  <div class="stack-item"><img
-                      src="https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/nextjs-icon.png"
-                      alt="next.js" style="width:20px;height:20px;display:inline-block;vertical-align:middle;"> next.js
+                  <div class="stack-item">
+                    <i class="devicon-rust-plain" style="color:#dea584;font-size:1.2rem;"></i>
+                    <span>rust</span>
                   </div>
-                  <div class="stack-item"><i class="devicon-react-original colored text-xl"></i> react.js</div>
-                  <div class="stack-item"><i class="devicon-typescript-plain colored text-xl"></i> typescript</div>
-                  <div class="stack-item"><img src="https://avatars.githubusercontent.com/u/10982346?s=48&v=4"
-                      alt="surrealdb"
-                      style="width:20px;height:20px;border-radius:4px;display:inline-block;vertical-align:middle;">
-                    surrealdb</div>
+                  <div class="stack-item">
+                    <img src="https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/nextjs-icon.png"
+                      alt="next.js" style="width:18px;height:18px;display:inline-block;vertical-align:middle;filter:invert(1);">
+                    <span>next.js</span>
+                  </div>
+                  <div class="stack-item">
+                    <i class="devicon-react-original colored" style="font-size:1.2rem;"></i>
+                    <span>react.js</span>
+                  </div>
+                  <div class="stack-item">
+                    <i class="devicon-typescript-plain colored" style="font-size:1.2rem;"></i>
+                    <span>typescript</span>
+                  </div>
+                  <div class="stack-item">
+                    <img src="https://avatars.githubusercontent.com/u/10982346?s=48&v=4"
+                      alt="surrealdb" style="width:18px;height:18px;border-radius:4px;display:inline-block;vertical-align:middle;">
+                    <span>surrealdb</span>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
 
+        <!-- 02. OPEN SOURCE -->
         <div class="section-header reveal-desc mt-section">
-          <span class="mono-tag copper-text">[ 02. OPEN SOURCE ]</span>
+          <span class="section-num">02</span>
+          <span class="section-title">Open Source</span>
         </div>
         <div class="blueprint-grid" id="projects-grid"></div>
 
+        <!-- 03. GITHUB -->
         <div class="section-header reveal-desc mt-section">
-          <span class="mono-tag copper-text">[ 03. GITHUB ]</span>
+          <span class="section-num">03</span>
+          <span class="section-title">GitHub</span>
         </div>
         <div class="blueprint-grid">
           <a href="https://github.com/xbl1e" target="_blank" rel="noopener noreferrer" class="card span-12 reveal-card">
-            <div class="card-sheen"></div>
             <div class="card-inner">
               <div class="card-top-bar border-bottom">
-                <span class="top-tag copper-text"><i class="ph ph-github-logo"></i> CONTRIBUTIONS</span>
+                <span class="top-tag copper-text"><i class="ph ph-github-logo"></i> Contributions</span>
               </div>
               <div class="card-vis">
-                <canvas id="github-globe" style="width:100%; height:200px; display:block;"></canvas>
+                <canvas id="github-globe" style="width:100%;height:200px;display:block;"></canvas>
               </div>
             </div>
           </a>
 
           <div class="card span-6 reveal-card mt-card">
-            <div class="card-sheen"></div>
             <div class="card-inner">
               <div class="card-top-bar border-bottom">
                 <span class="top-tag copper-text">
-                  <i class="ph ph-chart-bar"></i> STATS
-                  <span id="stat-month-active" style="margin-left: 10px; opacity: 0.5;"></span>
+                  <i class="ph ph-chart-bar"></i> Stats
+                  <span id="stat-month-active" style="margin-left:8px;opacity:0.5;"></span>
                 </span>
               </div>
               <div class="card-content">
-                <canvas id="stats-canvas" style="width:100%; height:120px; display:block; cursor: pointer;"></canvas>
+                <canvas id="stats-canvas" style="width:100%;height:110px;display:block;cursor:pointer;"></canvas>
                 <div class="gh-stats-grid">
                   <div class="gh-stat">
                     <span class="gh-stat-value" id="stat-commits">--</span>
@@ -189,45 +276,43 @@
           </div>
 
           <div class="card span-6 reveal-card mt-card">
-            <div class="card-sheen"></div>
             <div class="card-inner">
               <div class="card-top-bar border-bottom">
-                <span class="top-tag copper-text"><i class="ph ph-code"></i> TOP LANGUAGES</span>
+                <span class="top-tag copper-text"><i class="ph ph-code"></i> Top Languages</span>
               </div>
               <div class="card-content">
-                <canvas id="lang-canvas" style="width:100%; height:100px; display:block;"></canvas>
+                <canvas id="lang-canvas" style="width:100%;height:90px;display:block;"></canvas>
                 <div class="lang-list" id="lang-list"></div>
               </div>
             </div>
           </div>
         </div>
 
+        <!-- 04. SOCIAL -->
         <div class="section-header reveal-desc mt-section">
-          <span class="mono-tag copper-text">[ 04. SOCIAL ]</span>
+          <span class="section-num">04</span>
+          <span class="section-title">Social</span>
         </div>
         <div class="blueprint-grid">
           <a href="https://discord.com/users/1265980041813164149" target="_blank" rel="noopener noreferrer"
             class="card span-6 reveal-card full-width-card">
-            <div class="card-sheen"></div>
             <div class="card-inner">
               <div class="card-top-bar border-bottom">
-                <span class="top-tag copper-text"><i class="ph ph-discord-logo"></i> DISCORD</span>
+                <span class="top-tag copper-text"><i class="ph ph-discord-logo"></i> Discord</span>
               </div>
               <div class="card-vis">
-                <div class="discord-activity" style="width: 100%;">
+                <div class="discord-activity" style="width:100%;">
                   <div class="discord-header">
                     <div class="discord-avatar">
                       <div class="discord-status"></div>
                     </div>
                     <div class="discord-user-info">
-                      <div class="discord-name">𝖝𝖇𝖑1𝖊 - ザズル</div>
+                      <div class="discord-name">&#x1D54D;&#x1D531;&#x1D529;&#x1D7F7;&#x1D522; - &#x30B6;&#x30BA;&#x30EB;</div>
                       <div class="discord-handle-row">
                         <div class="discord-username">xbl2e</div>
                         <div class="discord-badges">
-                          <img src="https://cdn.discordapp.com/badge-icons/7d9ae358c8c5e118768335dbe68b4fb8.png"
-                            alt="Badge 1">
-                          <img src="https://cdn.discordapp.com/badge-icons/83d8a1eb09a8d64e59233eec5d4d5c2d.png"
-                            alt="Badge 2">
+                          <img src="https://cdn.discordapp.com/badge-icons/7d9ae358c8c5e118768335dbe68b4fb8.png" alt="Badge 1">
+                          <img src="https://cdn.discordapp.com/badge-icons/83d8a1eb09a8d64e59233eec5d4d5c2d.png" alt="Badge 2">
                         </div>
                       </div>
                     </div>
@@ -238,7 +323,7 @@
                     </div>
                     <div class="presence-content">
                       <div class="activity-asset">
-                        <img id="activity-icon" src="" style="display: none;" alt="Activity Icon">
+                        <img id="activity-icon" src="" style="display:none;" alt="Activity Icon">
                         <div class="activity-small-asset" id="activity-small-icon"></div>
                       </div>
                       <div class="activity-text">
@@ -258,13 +343,12 @@
           </a>
 
           <div class="card span-6 reveal-card">
-            <div class="card-sheen"></div>
-            <div class="card-inner" style="min-height: auto; padding-bottom: 2rem;">
+            <div class="card-inner" style="min-height:auto;padding-bottom:2rem;">
               <div class="card-top-bar border-bottom">
-                <span class="top-tag accent-text"><i class="ph ph-terminal-window"></i> FASTFETCH</span>
+                <span class="top-tag accent-text"><i class="ph ph-terminal-window"></i> Fastfetch</span>
               </div>
               <div class="fastfetch-wrapper">
-                <pre class="fastfetch-text" style="font-size: 0.62rem; line-height: 1.15;">
+                <pre class="fastfetch-text" style="font-size:0.6rem;line-height:1.15;">
 <span class="ff-blue">/////////////////  /////////////////</span>    <span class="ff-cyan">xbl1e@DESKTOP-FFU3V7K</span>
 <span class="ff-blue">/////////////////  /////////////////</span>    <span class="ff-white">---------------------</span>
 <span class="ff-blue">/////////////////  /////////////////</span>    <span class="ff-yellow">OS:</span><span class="ff-white"> Windows 11 Pro (25H2)</span>
@@ -289,24 +373,31 @@
         </div>
       </section>
 
+      <!-- ══ FOOTER ═══════════════════════════════════════════════════ -->
       <footer class="rigid-footer reveal-desc" id="elsewhere">
         <div class="footer-grid">
           <div class="footer-brand">
-            <div class="deco-cross" style="top: -10px; left: -10px;"></div>
-            <h2 class="serif-italic">thanks for stopping by.</h2>
+            <div class="deco-cross" style="top:-10px;left:-10px;"></div>
+            <p class="footer-eyebrow">get in touch</p>
+            <h2 class="footer-headline">
+              thanks for<br><em>stopping by.</em>
+            </h2>
           </div>
-          <div class="footer-links">
-            <span class="mono-tag">[ AROUND THE WEB ]</span>
-            <a href="#" class="footer-a">github</a>
+          <div class="footer-links-row">
+            <span class="mono-tag" style="margin-bottom:1.5rem;">[ around the web ]</span>
+            <a href="https://github.com/xbl1e" target="_blank" rel="noopener noreferrer" class="footer-a">github</a>
+            <a href="https://discord.com/users/1265980041813164149" target="_blank" rel="noopener noreferrer" class="footer-a">discord</a>
           </div>
         </div>
-        <div class="footer-base border-top">
-          <span class="mono-tag">© 2026 xbl1e</span>
+        <div class="footer-base">
+          <span class="mono-tag">&#169; 2026 xbl1e</span>
           <span class="mono-tag">have a good one.</span>
         </div>
       </footer>
+
     </div>
   </main>
+
   <script type="module" src="./src/main.js"></script>
 </body>
 
