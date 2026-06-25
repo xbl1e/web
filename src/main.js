@@ -15,16 +15,22 @@ import {
   initScrambleText,
   initTypographyReveal,
   initCardClipReveal,
-  initMagneticFriction
+  initMagneticFriction,
+  initTiltEffect,
+  initParallax
 } from './components/shared/interactions.js';
 
 gsap.registerPlugin(ScrollTrigger);
 
 document.addEventListener("DOMContentLoaded", () => {
+  initPreloader();
+  initCustomCursor();
   initLenis();
   initTypographyReveal();
   initCardClipReveal();
   initMagneticFriction();
+  initTiltEffect();
+  initParallax();
   initNetworkCanvas();
   initSparklineCanvas();
   initScrambleText();
@@ -34,6 +40,34 @@ document.addEventListener("DOMContentLoaded", () => {
   initLangCanvas();
   initProjectGrid();
 });
+
+function initPreloader() {
+  const tl = gsap.timeline();
+  tl.to('.preloader-progress', { width: '100%', duration: 1.5, ease: 'power2.inOut' })
+    .to('.preloader', { opacity: 0, duration: 0.8, ease: 'power2.inOut', onComplete: () => {
+      document.querySelector('.preloader').style.display = 'none';
+    }}, '+=0.2');
+}
+
+function initCustomCursor() {
+  const cursor = document.querySelector('.custom-cursor');
+  if (!cursor) return;
+
+  document.addEventListener('mousemove', (e) => {
+    gsap.to(cursor, {
+      x: e.clientX,
+      y: e.clientY,
+      duration: 0.1,
+      ease: 'power2.out'
+    });
+  });
+
+  const hoverElements = document.querySelectorAll('a, button, .magnetic, .card');
+  hoverElements.forEach(el => {
+    el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+    el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+  });
+}
 
 function initLenis() {
   const lenis = new Lenis({

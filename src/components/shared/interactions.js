@@ -82,6 +82,56 @@ export function initCardClipReveal() {
   });
 }
 
+export function initTiltEffect() {
+  const cards = document.querySelectorAll('.card-inner');
+
+  cards.forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+
+      const rotateX = ((y - centerY) / centerY) * -10;
+      const rotateY = ((x - centerX) / centerX) * 10;
+
+      gsap.to(card, {
+        rotateX: rotateX,
+        rotateY: rotateY,
+        transformPerspective: 1000,
+        ease: "power2.out",
+        duration: 0.5
+      });
+    });
+
+    card.addEventListener('mouseleave', () => {
+      gsap.to(card, {
+        rotateX: 0,
+        rotateY: 0,
+        ease: "power3.out",
+        duration: 1
+      });
+    });
+  });
+}
+
+export function initParallax() {
+  gsap.utils.toArray('.card, .hero-visual').forEach(el => {
+    gsap.to(el, {
+      yPercent: -15,
+      ease: "none",
+      scrollTrigger: {
+        trigger: el,
+        start: "top bottom",
+        end: "bottom top",
+        scrub: true
+      }
+    });
+  });
+}
+
 export function initMagneticFriction() {
   const magnetics = document.querySelectorAll('.magnetic');
   magnetics.forEach(btn => {
