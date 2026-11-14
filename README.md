@@ -9,9 +9,11 @@ index.html                              # Exhibition, project descriptions, and 
 src/
 ├── main.js                             # Page interactions
 ├── assets/page/                        # Exhibition artwork and favicon
-├── components/cards/
-│   ├── fieldNotes.js                   # GitHub activity and Discord presence
-│   └── projectGrid.js                  # Public repository catalogue
+├── components/
+│   ├── signalStudy.js                  # Interactive procedural canvas artwork
+│   └── cards/
+│       ├── fieldNotes.js                   # GitHub activity and Discord presence
+│       └── projectGrid.js                  # Public repository catalogue
 ├── styles/
 │   ├── main.css                        # Typography, hero, gallery, and motion
 │   └── catalogue.css                   # About, activity, project index, and footer

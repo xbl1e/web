@@ -1,20 +1,52 @@
 import './styles/main.css';
 import { initFieldNotes } from './components/cards/fieldNotes.js';
 import { initProjectGrid } from './components/cards/projectGrid.js';
+import { initSignalStudy } from './components/signalStudy.js';
 
-for (const link of document.querySelectorAll('[data-exhibit]')) {
-  const dialog = document.getElementById(link.dataset.exhibit);
-  if (!dialog?.showModal) continue;
+const canvas = document.getElementById('signal-art');
+const controls = document.getElementById('study-controls');
+const pauseButton = document.getElementById('study-pause');
+const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
+const study = initSignalStudy(canvas, { pause: motion.matches });
 
-  link.setAttribute('aria-haspopup', 'dialog');
-  link.addEventListener('click', (event) => {
-    if (event.defaultPrevented || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
-    event.preventDefault();
-    dialog.showModal();
+if (canvas.dataset.signalReady) {
+  controls.hidden = false;
+  const modes = [...controls.querySelectorAll('[data-mode]')];
+
+  for (const button of modes) {
+    button.addEventListener('click', () => {
+      study.setMode(Number(button.dataset.mode));
+      for (const mode of modes) mode.setAttribute('aria-pressed', mode === button);
+    });
+  }
+
+  function showMotionPreference() {
+    pauseButton.hidden = motion.matches;
+    if (motion.matches) study.setPaused(true);
+    pauseButton.setAttribute('aria-pressed', 'true');
+    pauseButton.setAttribute('aria-label', 'Play artwork');
+  }
+
+  if (motion.matches) showMotionPreference();
+  motion.addEventListener('change', showMotionPreference);
+
+  pauseButton.addEventListener('click', () => {
+    const pause = pauseButton.getAttribute('aria-pressed') !== 'true';
+    study.setPaused(pause);
+    pauseButton.setAttribute('aria-pressed', pause);
+    pauseButton.setAttribute('aria-label', pause ? 'Play artwork' : 'Pause artwork');
   });
+}
 
-  dialog.addEventListener('click', (event) => {
-    if (event.target === dialog) dialog.close();
+const specimen = document.getElementById('browser-specimen');
+const viewportControls = document.getElementById('viewport-controls');
+const viewportModes = [...viewportControls.querySelectorAll('[data-viewport]')];
+viewportControls.hidden = false;
+
+for (const button of viewportModes) {
+  button.addEventListener('click', () => {
+    specimen.dataset.viewport = button.dataset.viewport;
+    for (const mode of viewportModes) mode.setAttribute('aria-pressed', mode === button);
   });
 }
 
@@ -24,23 +56,6 @@ function openArchiveFromHash() {
 }
 window.addEventListener('hashchange', openArchiveFromHash);
 openArchiveFromHash();
-
-const pointerMotion = window.matchMedia('(hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)');
-for (const artwork of document.querySelectorAll('[data-tilt]')) {
-  artwork.addEventListener('pointermove', (event) => {
-    if (!pointerMotion.matches) return;
-    const bounds = artwork.getBoundingClientRect();
-    const x = (event.clientX - bounds.left) / bounds.width - 0.5;
-    const y = (event.clientY - bounds.top) / bounds.height - 0.5;
-    artwork.style.setProperty('--art-x', `${x * 13}px`);
-    artwork.style.setProperty('--art-y', `${y * 10}px`);
-  });
-
-  artwork.addEventListener('pointerleave', () => {
-    artwork.style.removeProperty('--art-x');
-    artwork.style.removeProperty('--art-y');
-  });
-}
 
 initProjectGrid();
 initFieldNotes();
