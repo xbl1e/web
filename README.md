@@ -12,7 +12,9 @@ src/
 ├── components/cards/
 │   ├── fieldNotes.js                   # GitHub activity and Discord presence
 │   └── projectGrid.js                  # Public repository catalogue
-├── styles/main.css                     # Typography, layout, and motion
+├── styles/
+│   ├── main.css                        # Typography, hero, gallery, and motion
+│   └── catalogue.css                   # About, activity, project index, and footer
 └── utils/github.js                     # Shared public GitHub repository request
 ```
 

@@ -18,22 +18,29 @@ for (const link of document.querySelectorAll('[data-exhibit]')) {
   });
 }
 
-const hero = document.querySelector('.hero-image');
+const archive = document.getElementById('archive');
+function openArchiveFromHash() {
+  if (window.location.hash === '#archive') archive.open = true;
+}
+window.addEventListener('hashchange', openArchiveFromHash);
+openArchiveFromHash();
+
 const pointerMotion = window.matchMedia('(hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)');
+for (const artwork of document.querySelectorAll('[data-tilt]')) {
+  artwork.addEventListener('pointermove', (event) => {
+    if (!pointerMotion.matches) return;
+    const bounds = artwork.getBoundingClientRect();
+    const x = (event.clientX - bounds.left) / bounds.width - 0.5;
+    const y = (event.clientY - bounds.top) / bounds.height - 0.5;
+    artwork.style.setProperty('--art-x', `${x * 13}px`);
+    artwork.style.setProperty('--art-y', `${y * 10}px`);
+  });
 
-hero.addEventListener('pointermove', (event) => {
-  if (!pointerMotion.matches) return;
-  const bounds = hero.getBoundingClientRect();
-  const x = (event.clientX - bounds.left) / bounds.width - 0.5;
-  const y = (event.clientY - bounds.top) / bounds.height - 0.5;
-  hero.style.setProperty('--hero-x', `${x * 14}px`);
-  hero.style.setProperty('--hero-y', `${y * 10}px`);
-});
-
-hero.addEventListener('pointerleave', () => {
-  hero.style.removeProperty('--hero-x');
-  hero.style.removeProperty('--hero-y');
-});
+  artwork.addEventListener('pointerleave', () => {
+    artwork.style.removeProperty('--art-x');
+    artwork.style.removeProperty('--art-y');
+  });
+}
 
 initProjectGrid();
 initFieldNotes();
