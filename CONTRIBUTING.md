@@ -8,7 +8,7 @@
 - **Keep it minimal** — the design should be quiet, fast, and functional.
 - **Vanilla JS only** — no frameworks or heavy libraries.
 - **Respect the style** — use custom properties from `main.css`, no hardcoded colors.
-- **Consistency** — Keep the "blueprint/engineering" aesthetic intact.
+- **Consistency** — Keep exhibition typography, restrained motion, and accessible navigation consistent.
 
 ### <img height="18" src="./src/assets/readme/git-branch.svg" style="vertical-align: middle;">&nbsp;&nbsp;Contribution Flow
 

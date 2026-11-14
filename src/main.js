@@ -1,47 +1,39 @@
 import './styles/main.css';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import Lenis from '@studio-freight/lenis';
-
-import { initDiscordPresence } from './components/cards/discordPresence.js';
-import { initNetworkCanvas } from './components/cards/networkFlow.js';
-import { initSparklineCanvas } from './components/cards/systemMetrics.js';
-import { initGitHubGlobe } from './components/cards/githubHeatmap.js';
-import { initStatsCanvas } from './components/cards/githubStats.js';
-import { initLangCanvas } from './components/cards/githubLangs.js';
+import { initFieldNotes } from './components/cards/fieldNotes.js';
 import { initProjectGrid } from './components/cards/projectGrid.js';
 
-import {
-  initScrambleText,
-  initTypographyReveal,
-  initCardClipReveal,
-  initMagneticFriction
-} from './components/shared/interactions.js';
+for (const link of document.querySelectorAll('[data-exhibit]')) {
+  const dialog = document.getElementById(link.dataset.exhibit);
+  if (!dialog?.showModal) continue;
 
-gsap.registerPlugin(ScrollTrigger);
+  link.setAttribute('aria-haspopup', 'dialog');
+  link.addEventListener('click', (event) => {
+    if (event.defaultPrevented || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
+    event.preventDefault();
+    dialog.showModal();
+  });
 
-document.addEventListener("DOMContentLoaded", () => {
-  initLenis();
-  initTypographyReveal();
-  initCardClipReveal();
-  initMagneticFriction();
-  initNetworkCanvas();
-  initSparklineCanvas();
-  initScrambleText();
-  initGitHubGlobe();
-  initDiscordPresence();
-  initStatsCanvas();
-  initLangCanvas();
-  initProjectGrid();
+  dialog.addEventListener('click', (event) => {
+    if (event.target === dialog) dialog.close();
+  });
+}
+
+const hero = document.querySelector('.hero-image');
+const pointerMotion = window.matchMedia('(hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)');
+
+hero.addEventListener('pointermove', (event) => {
+  if (!pointerMotion.matches) return;
+  const bounds = hero.getBoundingClientRect();
+  const x = (event.clientX - bounds.left) / bounds.width - 0.5;
+  const y = (event.clientY - bounds.top) / bounds.height - 0.5;
+  hero.style.setProperty('--hero-x', `${x * 14}px`);
+  hero.style.setProperty('--hero-y', `${y * 10}px`);
 });
 
-function initLenis() {
-  const lenis = new Lenis({
-    duration: 1.2,
-    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-    smooth: true,
-  });
-  lenis.on('scroll', ScrollTrigger.update);
-  gsap.ticker.add((time) => { lenis.raf(time * 1000) });
-  gsap.ticker.lagSmoothing(0);
-}
+hero.addEventListener('pointerleave', () => {
+  hero.style.removeProperty('--hero-x');
+  hero.style.removeProperty('--hero-y');
+});
+
+initProjectGrid();
+initFieldNotes();

@@ -1,96 +1,59 @@
-import { getGitHubRepos } from '../../utils/github.js';
-import { initScrambleText, initCardClipReveal } from '../shared/interactions.js';
+import { GITHUB_PROFILE, getGitHubRepos } from '../../utils/github.js';
 
 export async function initProjectGrid() {
   const grid = document.getElementById('projects-grid');
-  if (!grid) return;
+  const status = document.getElementById('archive-status');
+  if (!grid || !status) return;
 
-  const repos = await getGitHubRepos();
-  if (!repos || !repos.length) return;
+  status.textContent = 'Loading repositories…';
 
-  const colorMap = {
-    'Rust': '#dea584',
-    'TypeScript': '#4493f8',
-    'JavaScript': '#f7df1e',
-    'Python': '#3776ab',
-    'Astro': '#ff5a03',
-    'C++': '#f34b7d'
-  };
+  try {
+    const repositories = await getGitHubRepos();
 
-  const displayRepos = [...repos].sort((a, b) => {
-    if (b.stargazers_count !== a.stargazers_count) {
-      return b.stargazers_count - a.stargazers_count;
+    if (!repositories.length) {
+      status.textContent = 'No public repositories';
+      return;
     }
-    return new Date(b.updated_at) - new Date(a.updated_at);
-  }).slice(0, 6);
 
-  grid.innerHTML = displayRepos.map(repo => {
-    const timeAgo = formatTimeAgo(new Date(repo.updated_at));
-    const langColor = colorMap[repo.language] || '#888890';
-    const badgeClass = repo.archived ? 'gh-repo-badge gh-repo-archive' : 'gh-repo-badge';
-
-    return `
-      <a href="${repo.html_url}" target="_blank" rel="noopener noreferrer" class="card span-6 reveal-card">
-        <div class="card-sheen"></div>
-        <div class="card-inner flex-col justify-between">
-          <div class="gh-repo-header">
-            <div class="gh-repo-icon">
-              <i class="ph ph-github-logo"></i>
-            </div>
-            <div class="gh-repo-meta-full">
-              <div class="gh-repo-title-row">
-                <span class="gh-repo-title scramble-text">${repo.name}</span>
-                <span class="${badgeClass}">${repo.archived ? 'Public archive' : 'Public'}</span>
-              </div>
-            </div>
-          </div>
-          ${repo.fork && repo.parent ? `
-            <div class="gh-repo-fork">
-              <i class="ph ph-git-fork"></i> Forked from <span class="gh-fork-link">${repo.parent.full_name}</span>
-            </div>
-          ` : ''}
-          <p class="gh-repo-desc">${repo.description || 'No description provided.'}</p>
-          <div class="gh-repo-footer">
-            <div class="flex-row gap-1 align-center">
-              ${(repo.language || (repo.parent && repo.parent.language)) ? `
-                <div class="gh-repo-lang">
-                  <span class="gh-lang-color" style="background-color: ${colorMap[repo.language || repo.parent.language] || '#888890'};"></span>
-                  <span class="gh-lang-name">${repo.language || repo.parent.language}</span>
-                </div>
-              ` : ''}
-              <div class="gh-repo-stats">
-                <span class="gh-stat-item">
-                  <i class="ph ph-star"></i> ${repo.stargazers_count}
-                </span>
-                ${repo.license ? `
-                  <span class="gh-stat-item">
-                    <i class="ph ph-scales"></i> ${repo.license.spdx_id || repo.license.name}
-                  </span>
-                ` : ''}
-                <span class="gh-stat-item">
-                  <i class="ph ph-git-fork"></i> ${repo.forks_count}
-                </span>
-              </div>
-            </div>
-            <div class="gh-repo-updated">updated ${timeAgo}</div>
-          </div>
-        </div>
-      </a>
-    `;
-  }).join('');
-
-  initScrambleText();
-  initCardClipReveal();
+    const catalogue = [...repositories].sort((a, b) => Number(Boolean(a.fork)) - Number(Boolean(b.fork)));
+    grid.replaceChildren(...catalogue.map(renderRepository));
+    status.textContent = `${catalogue.length} ${catalogue.length === 1 ? 'repository' : 'repositories'}`;
+  } catch {
+    status.textContent = 'GitHub repositories are temporarily unavailable';
+  }
 }
 
-function formatTimeAgo(date) {
-  const now = new Date();
-  const diff = Math.floor((now - date) / 1000);
+function renderRepository(repository, index) {
+  const row = document.createElement('a');
+  row.className = 'archive-row';
+  row.href = `${GITHUB_PROFILE}/${encodeURIComponent(repository.name)}`;
+  row.target = '_blank';
+  row.rel = 'noopener noreferrer';
 
-  if (diff < 60) return 'just now';
-  if (diff < 3600) return `${Math.floor(diff / 60)}m ago`;
-  if (diff < 86400) return `${Math.floor(diff / 3600)}h ago`;
-  if (diff < 604800) return `${Math.floor(diff / 86400)}d ago`;
-  if (diff < 2592000) return `${Math.floor(diff / 604800)}w ago`;
-  return `${Math.floor(diff / 2592000)}mo ago`;
+  const number = makeLabel('archive-number', String(index + 1).padStart(2, '0'));
+  number.setAttribute('aria-hidden', 'true');
+
+  const metadata = [repository.language];
+  if (repository.fork) metadata.push('Fork');
+  if (repository.archived) metadata.push('Archived');
+
+  const arrow = makeLabel('archive-arrow', '↗');
+  arrow.setAttribute('aria-hidden', 'true');
+
+  row.append(
+    number,
+    makeLabel('archive-name', repository.name),
+    makeLabel('archive-summary', repository.description || ''),
+    makeLabel('archive-language', metadata.filter(Boolean).join(' · ') || '—'),
+    arrow,
+  );
+
+  return row;
+}
+
+function makeLabel(className, text) {
+  const label = document.createElement('span');
+  label.className = className;
+  label.textContent = text;
+  return label;
 }
