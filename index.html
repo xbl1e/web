@@ -1,313 +1,210 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>xbl1e</title>
-  <link rel="icon" type="image/png" href="./src/assets/page/xbl1e.png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101015">
+  <meta name="description" content="xbl1e is a software developer working on backend systems, interfaces and creative code. Explore selected projects and interactive studies.">
+  <meta property="og:title" content="xbl1e — Software in motion">
+  <meta property="og:description" content="Selected work in software, interfaces and creative code.">
+  <title>xbl1e — Software in motion</title>
+  <link rel="icon" type="image/png" href="./src/assets/page/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&display=swap"
-    rel="stylesheet">
-  <script src="https://unpkg.com/@phosphor-icons/web"></script>
-  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400..800&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=Space+Grotesk:wght@400..700&amp;display=swap" rel="stylesheet">
 </head>
-
-<body>
-  <nav class="floating-nav">
-    <div class="nav-pill">
-      <a href="#" class="nav-brand">
-        <img src="./src/assets/page/xbl1e.png" alt="xbl1e logo" class="nav-logo">
-        <span class="brand-name">xbl1e</span>
-      </a>
-      <span class="nav-divider"></span>
-      <div class="nav-links">
+<body id="top">
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+    <div class="header-inner shell">
+      <a class="wordmark" href="#top" aria-label="xbl1e, back to top"><span aria-hidden="true" class="brand-mark"></span>xbl1e</a>
+      <nav class="site-nav" aria-label="Main navigation">
         <a href="#work">Work</a>
         <a href="#about">About</a>
-        <a href="#tos">ToS</a>
-        <a href="#privacy">Privacy Policy</a>
+      </nav>
+      <a class="header-contact" href="#contact">Contact <span aria-hidden="true">↗</span></a>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <section class="hero-stage" aria-labelledby="hero-title">
+      <div class="stage-frame shell" aria-hidden="true"></div>
+      <div class="hero-visual" aria-hidden="true">
+        <picture>
+          <source media="(max-width: 719px)" srcset="./src/assets/page/signal-study-mobile.webp">
+          <img class="signal-still" src="./src/assets/page/signal-study.webp" width="1280" height="720" alt="" fetchpriority="high">
+        </picture>
+        <canvas id="signal-art"></canvas>
+      </div>
+      <div class="hero-content shell">
+        <div class="hero-copy">
+          <p class="hero-role eyebrow"><span></span> Independent software developer</p>
+          <h1 id="hero-title">Software<br><em>in motion.</em></h1>
+          <p class="hero-intro">I build backend systems and design the interfaces you meet them through.</p>
+          <a class="hero-link" href="#work"><span aria-hidden="true">↓</span> Explore selected work</a>
+        </div>
+
+        <div class="study-bar">
+          <div class="study-caption eyebrow"><span aria-hidden="true" class="study-icon">⌁</span> Signal studies</div>
+          <div class="study-controls" id="study-controls" hidden>
+            <div class="study-modes" role="group" aria-label="Sculpture form">
+              <button type="button" data-mode="0" aria-pressed="true">Flow</button>
+              <button type="button" data-mode="1" aria-pressed="false">Orbit</button>
+              <button type="button" data-mode="2" aria-pressed="false">Pulse</button>
+            </div>
+            <button type="button" class="study-pause" id="study-pause" aria-label="Pause artwork" aria-pressed="false">
+              <span class="pause-symbol" aria-hidden="true"></span>
+            </button>
+          </div>
+          <a href="#archive" class="study-next eyebrow">Repository index <span aria-hidden="true">↘</span></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="work-section" id="work" aria-labelledby="works-title">
+      <div class="shell">
+        <div class="work-heading">
+          <h2 id="works-title">Selected<br>work<span>.</span></h2>
+          <div class="work-index-links">
+            <a href="#web-project"><span>01</span> The Website <span aria-hidden="true">↓</span></a>
+            <a href="#quest-project"><span>02</span> QuestCompleter <span aria-hidden="true">↓</span></a>
+          </div>
+        </div>
+
+        <article class="project project-web" id="web-project" aria-labelledby="web-title">
+          <div class="project-visual web-visual">
+            <div class="visual-label eyebrow"><span>01 / The Website</span><span>Responsive layout study</span></div>
+            <figure class="browser-specimen" id="browser-specimen">
+              <div class="browser-bar"><span aria-hidden="true"></span><span>xbl1e / Portfolio</span><span aria-hidden="true">↗</span></div>
+              <div class="browser-page">
+                <div class="browser-nav"><b>xbl1e</b><span>Work &nbsp; About &nbsp; Contact</span></div>
+                <div class="browser-head">
+                  <div class="browser-art"></div>
+                  <div class="browser-copy"><span>Independent software developer</span><strong>Software<br><i>in motion.</i></strong></div>
+                </div>
+                <div class="browser-work"><strong>Selected work.</strong><span>01 — 02</span></div>
+              </div>
+              <figcaption class="visually-hidden">A responsive model of this portfolio’s opening layout.</figcaption>
+            </figure>
+            <div class="viewport-controls" id="viewport-controls" role="group" aria-label="Portfolio preview width" hidden>
+              <button type="button" data-viewport="desktop" aria-pressed="true">Desktop</button>
+              <button type="button" data-viewport="mobile" aria-pressed="false">Mobile</button>
+            </div>
+          </div>
+          <div class="project-caption">
+            <div class="project-heading">
+              <p class="eyebrow">01 / Creative development</p>
+              <h3 id="web-title">The Website</h3>
+            </div>
+            <div class="project-description">
+              <p>My portfolio doubles as a place to experiment with the browser. The opening study is drawn in code. The repository index pulls from my public GitHub profile.</p>
+              <a class="text-link" href="https://github.com/xbl1e/web" target="_blank" rel="noopener noreferrer">View repository <span aria-hidden="true">↗</span></a>
+            </div>
+          </div>
+        </article>
+
+        <article class="project project-quest" id="quest-project" aria-labelledby="quest-title">
+          <div class="project-visual quest-visual">
+            <div class="visual-label eyebrow"><span>02 / QuestCompleter</span><span>Interface reconstruction</span></div>
+            <div class="quest-exhibit">
+              <div class="quest-brand">
+                <img src="./src/assets/page/questcompleter.webp" alt="" width="320" height="320" loading="lazy" decoding="async">
+                <span>Quest<br>Completer<span aria-hidden="true">.</span></span>
+              </div>
+              <figure class="quest-specimen">
+                <div class="quest-panel-bar"><span aria-hidden="true">◈</span><strong>Quest progress</strong><span>Sample data</span></div>
+                <div class="quest-panel-body">
+                  <div class="sample-quest-head"><div class="quest-type-icon" aria-hidden="true">▶</div><div><strong>Watch Video</strong><span>Reward · 500 Orbs</span></div></div>
+                  <div class="quest-meter" role="progressbar" aria-label="Sample quest progress" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"><span></span></div>
+                  <div class="quest-panel-meta"><span>3m / 6m (50%)</span><span>Pending</span></div>
+                </div>
+                <figcaption class="visually-hidden">An interface study based on the QuestItem component. Data shown are illustrative.</figcaption>
+              </figure>
+            </div>
+          </div>
+          <div class="project-caption">
+            <div class="project-heading">
+              <p class="eyebrow">02 / TypeScript · Vencord</p>
+              <h3 id="quest-title">QuestCompleter</h3>
+            </div>
+            <div class="project-description">
+              <p>A Vencord plugin that automates supported Discord Quests. Its in-client panel surfaces each task’s progress, status and reward.</p>
+              <a class="text-link" href="https://github.com/xbl1e/questcompleter/blob/dev/components/QuestItem.tsx" target="_blank" rel="noopener noreferrer">View component <span aria-hidden="true">↗</span></a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <div class="info-section">
+      <div class="info-grid shell">
+        <section class="info-about" id="about" aria-labelledby="about-title">
+          <p class="eyebrow">About</p>
+          <h2 class="info-title" id="about-title">I’m xbl1e<span>.</span></h2>
+          <p class="info-bio">I build backend systems and care about how they feel at the surface. I enjoy chasing down the bottleneck in a sync engine as much as refining an interaction.</p>
+          <ul class="tools" aria-label="Tools I reach for">
+            <li>Rust</li><li>TypeScript</li><li>React</li><li>Next.js</li><li>SurrealDB</li>
+          </ul>
+        </section>
+        <section class="field-notes" aria-labelledby="notes-title">
+          <h2 class="info-title" id="notes-title">Activity<span>.</span></h2>
+          <div class="notes-grid">
+            <article class="note-panel" id="github-activity">
+              <div class="note-header">
+                <h3>GitHub</h3>
+                <a class="text-link" href="https://github.com/xbl1e" target="_blank" rel="noopener noreferrer">Profile <span aria-hidden="true">↗</span></a>
+              </div>
+              <dl class="note-stats">
+                <div><dt>Repositories</dt><dd id="stat-repos">—</dd></div>
+                <div><dt>Stars</dt><dd id="stat-stars">—</dd></div>
+                <div><dt>Contributions / past year</dt><dd id="stat-contributions">—</dd></div>
+              </dl>
+              <div class="activity-heatmap" id="activity-heatmap" hidden></div>
+            </article>
+            <article class="note-panel discord-panel">
+              <div class="note-header">
+                <h3>Discord</h3>
+                <a class="text-link" href="https://discord.com/users/1265980041813164149" target="_blank" rel="noopener noreferrer">Profile <span aria-hidden="true">↗</span></a>
+              </div>
+              <p class="presence" id="discord-status" role="status">
+                <span id="discord-status-dot" aria-hidden="true"></span>
+                <span id="discord-activity-text">Presence unavailable</span>
+              </p>
+              <p class="discord-handle">@xbl2e</p>
+            </article>
+          </div>
+        </section>
+        <details class="repo-index" id="archive">
+          <summary><span>Open-source repository index</span><span class="index-toggle" aria-hidden="true"></span></summary>
+          <div class="index-body">
+            <div class="archive-heading eyebrow"><span>Public repositories</span><span id="archive-status" role="status"></span></div>
+            <div id="projects-grid">
+              <p class="archive-fallback"><a href="https://github.com/xbl1e?tab=repositories" target="_blank" rel="noopener noreferrer">Browse the source on GitHub ↗</a></p>
+            </div>
+          </div>
+        </details>
       </div>
     </div>
-  </nav>
-
-  <main id="smooth-wrapper">
-    <div id="smooth-content">
-      <section class="hero-split">
-        <div class="hero-typography reveal-visual">
-          <div class="kicker reveal-text">// software developer</div>
-          <h1 class="hero-title">
-            <div class="reveal-text">writing code</div>
-            <div class="reveal-text">that <em class="serif-italic">feels right.</em></div>
-          </h1>
-          <p class="hero-description reveal-desc">i like building things that are quiet, fast, and do exactly what they
-            need to. mostly backend systems, but i care a lot about how the interface feels.</p>
-          <div class="hero-cta reveal-desc">
-            <a href="https://github.com/xbl1e" target="_blank" class="btn-physical magnetic">
-              <span class="btn-text">see what i'm making</span>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="square" />
-              </svg>
-            </a>
-          </div>
-        </div>
-        <div class="hero-visual reveal-visual">
-          <img src="./src/assets/page/hero.gif" alt="Hero Visual" class="hero-gif">
-        </div>
-      </section>
-
-      <section class="blueprint-section" id="work">
-        <div class="section-header reveal-desc">
-          <span class="mono-tag copper-text">[ 01. ME ]</span>
-        </div>
-        <div class="blueprint-grid">
-          <div class="card span-8 reveal-card">
-            <div class="card-sheen"></div>
-            <div class="card-inner">
-              <div class="blueprint-visual relative">
-                <canvas id="network-canvas"
-                  style="position: absolute; top:0; left:0; width:100%; height:100%;"></canvas>
-              </div>
-              <div class="card-content mt-auto pt-2">
-                <p class="card-desc">i spent a few months rewriting a sync engine. it was mostly about finding
-                  bottlenecks and getting rid of them. now it just runs quietly in the background.</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="card span-4 card-elevated reveal-card">
-            <div class="card-sheen"></div>
-            <div class="card-inner flex-col" style="position: relative;">
-              <canvas id="sparkline-canvas"
-                style="position: absolute; bottom:0; left:0; width:100%; height: 60%; opacity: 0.3; pointer-events: none;"></canvas>
-              <div class="card-top-bar" style="position: relative; z-index: 2;">
-                <span class="top-tag copper-text">WHAT MATTERS</span>
-              </div>
-              <div class="metrics-content">
-                <div class="metric-block">
-                  <div class="metric-value">speed<span class="metric-unit">.</span></div>
-                  <div class="metric-label">IN RESPONSIVENESS</div>
-                </div>
-                <div class="metric-block mt-auto">
-                  <div class="metric-value">detail<span class="metric-unit">.</span></div>
-                  <div class="metric-label">IN THE SMALL THINGS</div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="card span-4 reveal-card">
-            <div class="card-sheen"></div>
-            <div class="card-inner">
-              <div class="card-top-bar border-bottom">
-                <span class="top-tag">HOW I WORK</span>
-              </div>
-              <div class="card-content editorial">
-                <h3 class="serif-italic large-quote">"good software shouldn't draw attention to itself."</h3>
-              </div>
-            </div>
-          </div>
-
-          <div class="card span-8 reveal-card">
-            <div class="card-sheen"></div>
-            <div class="card-inner">
-              <div class="card-top-bar border-bottom">
-                <span class="top-tag">TOOLS I REACH FOR</span>
-              </div>
-              <div class="card-content">
-                <div class="stack-list">
-                  <div class="stack-item"><i class="devicon-rust-plain text-xl" style="color: #dea584;"></i> rust</div>
-                  <div class="stack-item"><img
-                      src="https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/nextjs-icon.png"
-                      alt="next.js" style="width:20px;height:20px;display:inline-block;vertical-align:middle;"> next.js
-                  </div>
-                  <div class="stack-item"><i class="devicon-react-original colored text-xl"></i> react.js</div>
-                  <div class="stack-item"><i class="devicon-typescript-plain colored text-xl"></i> typescript</div>
-                  <div class="stack-item"><img src="https://avatars.githubusercontent.com/u/10982346?s=48&v=4"
-                      alt="surrealdb"
-                      style="width:20px;height:20px;border-radius:4px;display:inline-block;vertical-align:middle;">
-                    surrealdb</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="section-header reveal-desc mt-section">
-          <span class="mono-tag copper-text">[ 02. OPEN SOURCE ]</span>
-        </div>
-        <div class="blueprint-grid" id="projects-grid"></div>
-
-        <div class="section-header reveal-desc mt-section">
-          <span class="mono-tag copper-text">[ 03. GITHUB ]</span>
-        </div>
-        <div class="blueprint-grid">
-          <a href="https://github.com/xbl1e" target="_blank" rel="noopener noreferrer" class="card span-12 reveal-card">
-            <div class="card-sheen"></div>
-            <div class="card-inner">
-              <div class="card-top-bar border-bottom">
-                <span class="top-tag copper-text"><i class="ph ph-github-logo"></i> CONTRIBUTIONS</span>
-              </div>
-              <div class="card-vis">
-                <canvas id="github-globe" style="width:100%; height:200px; display:block;"></canvas>
-              </div>
-            </div>
-          </a>
-
-          <div class="card span-6 reveal-card mt-card">
-            <div class="card-sheen"></div>
-            <div class="card-inner">
-              <div class="card-top-bar border-bottom">
-                <span class="top-tag copper-text">
-                  <i class="ph ph-chart-bar"></i> STATS
-                  <span id="stat-month-active" style="margin-left: 10px; opacity: 0.5;"></span>
-                </span>
-              </div>
-              <div class="card-content">
-                <canvas id="stats-canvas" style="width:100%; height:120px; display:block; cursor: pointer;"></canvas>
-                <div class="gh-stats-grid">
-                  <div class="gh-stat">
-                    <span class="gh-stat-value" id="stat-commits">--</span>
-                    <span class="gh-stat-label">commits</span>
-                  </div>
-                  <div class="gh-stat">
-                    <span class="gh-stat-value" id="stat-prs">--</span>
-                    <span class="gh-stat-label">PRs</span>
-                  </div>
-                  <div class="gh-stat">
-                    <span class="gh-stat-value" id="stat-repos">--</span>
-                    <span class="gh-stat-label">repos</span>
-                  </div>
-                  <div class="gh-stat">
-                    <span class="gh-stat-value" id="stat-stars">--</span>
-                    <span class="gh-stat-label">stars</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="card span-6 reveal-card mt-card">
-            <div class="card-sheen"></div>
-            <div class="card-inner">
-              <div class="card-top-bar border-bottom">
-                <span class="top-tag copper-text"><i class="ph ph-code"></i> TOP LANGUAGES</span>
-              </div>
-              <div class="card-content">
-                <canvas id="lang-canvas" style="width:100%; height:100px; display:block;"></canvas>
-                <div class="lang-list" id="lang-list"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="section-header reveal-desc mt-section">
-          <span class="mono-tag copper-text">[ 04. SOCIAL ]</span>
-        </div>
-        <div class="blueprint-grid">
-          <a href="https://discord.com/users/1265980041813164149" target="_blank" rel="noopener noreferrer"
-            class="card span-6 reveal-card full-width-card">
-            <div class="card-sheen"></div>
-            <div class="card-inner">
-              <div class="card-top-bar border-bottom">
-                <span class="top-tag copper-text"><i class="ph ph-discord-logo"></i> DISCORD</span>
-              </div>
-              <div class="card-vis">
-                <div class="discord-activity" style="width: 100%;">
-                  <div class="discord-header">
-                    <div class="discord-avatar">
-                      <div class="discord-status"></div>
-                    </div>
-                    <div class="discord-user-info">
-                      <div class="discord-name">𝖝𝖇𝖑1𝖊 - ザズル</div>
-                      <div class="discord-handle-row">
-                        <div class="discord-username">xbl2e</div>
-                        <div class="discord-badges">
-                          <img src="https://cdn.discordapp.com/badge-icons/7d9ae358c8c5e118768335dbe68b4fb8.png"
-                            alt="Badge 1">
-                          <img src="https://cdn.discordapp.com/badge-icons/83d8a1eb09a8d64e59233eec5d4d5c2d.png"
-                            alt="Badge 2">
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="discord-presence-body" id="discord-presence">
-                    <div class="presence-header">
-                      <span id="presence-label">Playing</span>
-                    </div>
-                    <div class="presence-content">
-                      <div class="activity-asset">
-                        <img id="activity-icon" src="" style="display: none;" alt="Activity Icon">
-                        <div class="activity-small-asset" id="activity-small-icon"></div>
-                      </div>
-                      <div class="activity-text">
-                        <div class="activity-name" id="activity-name">Loading...</div>
-                        <div class="activity-details" id="activity-details"></div>
-                        <div class="activity-state" id="activity-state"></div>
-                        <div class="activity-time-row">
-                          <i class="ph-fill ph-game-controller"></i>
-                          <span class="activity-time" id="activity-time"></span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </a>
-
-          <div class="card span-6 reveal-card">
-            <div class="card-sheen"></div>
-            <div class="card-inner" style="min-height: auto; padding-bottom: 2rem;">
-              <div class="card-top-bar border-bottom">
-                <span class="top-tag accent-text"><i class="ph ph-terminal-window"></i> FASTFETCH</span>
-              </div>
-              <div class="fastfetch-wrapper">
-                <pre class="fastfetch-text" style="font-size: 0.62rem; line-height: 1.15;">
-<span class="ff-blue">/////////////////  /////////////////</span>    <span class="ff-cyan">xbl1e@DESKTOP-FFU3V7K</span>
-<span class="ff-blue">/////////////////  /////////////////</span>    <span class="ff-white">---------------------</span>
-<span class="ff-blue">/////////////////  /////////////////</span>    <span class="ff-yellow">OS:</span><span class="ff-white"> Windows 11 Pro (25H2)</span>
-<span class="ff-blue">/////////////////  /////////////////</span>    <span class="ff-yellow">Host:</span><span class="ff-white"> K1R4LABS EDITION</span>
-<span class="ff-blue">/////////////////  /////////////////</span>    <span class="ff-yellow">Kernel:</span><span class="ff-white"> WIN32_NT 10.0.26200</span>
-<span class="ff-blue">/////////////////  /////////////////</span>    <span class="ff-yellow">Uptime:</span><span class="ff-white"> 2 hours, 24 mins</span>
-<span class="ff-blue">/////////////////  /////////////////</span>    <span class="ff-yellow">Packages:</span><span class="ff-white"> 23 (choco)</span>
-<span class="ff-blue">/////////////////  /////////////////</span>    <span class="ff-yellow">Shell:</span><span class="ff-white"> CMD 10.0</span>
-                                        <span class="ff-yellow">Display:</span><span class="ff-white"> 1440x1080, 280 Hz</span>
-<span class="ff-blue">/////////////////  /////////////////</span>    <span class="ff-yellow">WM:</span><span class="ff-white"> Desktop Window Manager</span>
-<span class="ff-blue">/////////////////  /////////////////</span>    <span class="ff-yellow">WM Theme:</span><span class="ff-white"> Custom - #4A51A8</span>
-<span class="ff-blue">/////////////////  /////////////////</span>    <span class="ff-yellow">Theme:</span><span class="ff-white"> Fluent</span>
-<span class="ff-blue">/////////////////  /////////////////</span>    <span class="ff-yellow">CPU:</span><span class="ff-white"> AMD Ryzen 7 7800X3D (16)</span>
-<span class="ff-blue">/////////////////  /////////////////</span>    <span class="ff-yellow">GPU:</span><span class="ff-white"> NVIDIA GeForce RTX 3070</span>
-<span class="ff-blue">/////////////////  /////////////////</span>    <span class="ff-yellow">Memory:</span><span class="ff-white"> 21.57 GiB / 31.16 GiB</span>
-<span class="ff-blue">/////////////////  /////////////////</span>    <span class="ff-yellow">Disk (C:\):</span><span class="ff-white"> 669.25 GiB / 837.42 GiB</span>
-<span class="ff-blue">/////////////////  /////////////////</span>    <span class="ff-yellow">Disk (S:\):</span><span class="ff-white"> 48.88 GiB / 238.46 GiB</span>
-                </pre>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <footer class="rigid-footer reveal-desc" id="elsewhere">
-        <div class="footer-grid">
-          <div class="footer-brand">
-            <div class="deco-cross" style="top: -10px; left: -10px;"></div>
-            <h2 class="serif-italic">thanks for stopping by.</h2>
-          </div>
-          <div class="footer-links">
-            <span class="mono-tag">[ AROUND THE WEB ]</span>
-            <a href="#" class="footer-a">github</a>
-          </div>
-        </div>
-        <div class="footer-base border-top">
-          <span class="mono-tag">© 2026 xbl1e</span>
-          <span class="mono-tag">have a good one.</span>
-        </div>
-      </footer>
-    </div>
   </main>
+
+  <footer class="site-footer" id="contact">
+    <div class="shell">
+      <div class="footer-main">
+        <div>
+          <p class="eyebrow">Get in touch</p>
+          <h2 class="footer-title">Say hello<span>.</span></h2>
+        </div>
+        <div class="footer-links">
+          <a href="https://github.com/xbl1e" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a>
+          <a href="https://discord.com/users/1265980041813164149" target="_blank" rel="noopener noreferrer">Discord <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+      <div class="footer-bottom eyebrow">
+        <span>© xbl1e</span>
+        <a href="#top">Back to top <span aria-hidden="true">↑</span></a>
+      </div>
+    </div>
+  </footer>
   <script type="module" src="./src/main.js"></script>
 </body>
-
 </html>

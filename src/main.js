@@ -1,47 +1,61 @@
 import './styles/main.css';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import Lenis from '@studio-freight/lenis';
-
-import { initDiscordPresence } from './components/cards/discordPresence.js';
-import { initNetworkCanvas } from './components/cards/networkFlow.js';
-import { initSparklineCanvas } from './components/cards/systemMetrics.js';
-import { initGitHubGlobe } from './components/cards/githubHeatmap.js';
-import { initStatsCanvas } from './components/cards/githubStats.js';
-import { initLangCanvas } from './components/cards/githubLangs.js';
+import { initFieldNotes } from './components/cards/fieldNotes.js';
 import { initProjectGrid } from './components/cards/projectGrid.js';
+import { initSignalStudy } from './components/signalStudy.js';
 
-import {
-  initScrambleText,
-  initTypographyReveal,
-  initCardClipReveal,
-  initMagneticFriction
-} from './components/shared/interactions.js';
+const canvas = document.getElementById('signal-art');
+const controls = document.getElementById('study-controls');
+const pauseButton = document.getElementById('study-pause');
+const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
+const study = initSignalStudy(canvas, { pause: motion.matches });
 
-gsap.registerPlugin(ScrollTrigger);
+if (canvas.dataset.signalReady) {
+  controls.hidden = false;
+  const modes = [...controls.querySelectorAll('[data-mode]')];
 
-document.addEventListener("DOMContentLoaded", () => {
-  initLenis();
-  initTypographyReveal();
-  initCardClipReveal();
-  initMagneticFriction();
-  initNetworkCanvas();
-  initSparklineCanvas();
-  initScrambleText();
-  initGitHubGlobe();
-  initDiscordPresence();
-  initStatsCanvas();
-  initLangCanvas();
-  initProjectGrid();
-});
+  for (const button of modes) {
+    button.addEventListener('click', () => {
+      study.setMode(Number(button.dataset.mode));
+      for (const mode of modes) mode.setAttribute('aria-pressed', mode === button);
+    });
+  }
 
-function initLenis() {
-  const lenis = new Lenis({
-    duration: 1.2,
-    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-    smooth: true,
+  function showMotionPreference() {
+    pauseButton.hidden = motion.matches;
+    if (motion.matches) study.setPaused(true);
+    pauseButton.setAttribute('aria-pressed', 'true');
+    pauseButton.setAttribute('aria-label', 'Play artwork');
+  }
+
+  if (motion.matches) showMotionPreference();
+  motion.addEventListener('change', showMotionPreference);
+
+  pauseButton.addEventListener('click', () => {
+    const pause = pauseButton.getAttribute('aria-pressed') !== 'true';
+    study.setPaused(pause);
+    pauseButton.setAttribute('aria-pressed', pause);
+    pauseButton.setAttribute('aria-label', pause ? 'Play artwork' : 'Pause artwork');
   });
-  lenis.on('scroll', ScrollTrigger.update);
-  gsap.ticker.add((time) => { lenis.raf(time * 1000) });
-  gsap.ticker.lagSmoothing(0);
 }
+
+const specimen = document.getElementById('browser-specimen');
+const viewportControls = document.getElementById('viewport-controls');
+const viewportModes = [...viewportControls.querySelectorAll('[data-viewport]')];
+viewportControls.hidden = false;
+
+for (const button of viewportModes) {
+  button.addEventListener('click', () => {
+    specimen.dataset.viewport = button.dataset.viewport;
+    for (const mode of viewportModes) mode.setAttribute('aria-pressed', mode === button);
+  });
+}
+
+const archive = document.getElementById('archive');
+function openArchiveFromHash() {
+  if (window.location.hash === '#archive') archive.open = true;
+}
+window.addEventListener('hashchange', openArchiveFromHash);
+openArchiveFromHash();
+
+initProjectGrid();
+initFieldNotes();
